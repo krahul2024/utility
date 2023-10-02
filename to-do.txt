@@ -1,0 +1,51 @@
+1. Text Documents:
+   - TXT: Plain text files.
+   - PDF: Portable Document Format.
+   - HTML: Hypertext Markup Language.
+   - DOCX: Microsoft Word document.
+   - Markdown (MD): A lightweight markup language.
+
+2. PDF Documents:
+   - TXT: Convert PDF to plain text.
+   - HTML: Convert PDF to HTML format.
+   - DOCX: Convert PDF to Microsoft Word document.
+   - Image Formats (JPEG, PNG, etc.): Convert PDF pages to image files.
+   - eBook Formats (ePub, MOBI): Convert PDF to eBook formats.
+
+3. HTML Documents:
+   - TXT: Strip HTML tags to get plain text.
+   - PDF: Convert HTML to PDF using libraries like `puppeteer`.
+   - Markdown (MD): Convert HTML to Markdown.
+   - eBook Formats (ePub, MOBI): Convert HTML to eBook formats.
+
+4. Microsoft Word (DOCX) Documents:
+   - TXT: Extract text content from DOCX.
+   - PDF: Convert DOCX to PDF.
+   - HTML: Convert DOCX to HTML.
+   - Markdown (MD): Convert DOCX to Markdown.
+
+5. Markdown (MD) Documents:
+   - TXT: Markdown files are plain text, so they can be treated as TXT.
+   - HTML: Convert Markdown to HTML using Markdown processors like `marked`.
+   - PDF: Convert Markdown to PDF using tools like `pandoc`.
+   - DOCX: Convert Markdown to DOCX.
+
+6. eBook Formats (ePub, MOBI):
+   - TXT: Convert eBooks to plain text.
+   - PDF: Convert eBooks to PDF.
+   - HTML: Convert eBooks to HTML.
+   - DOCX: Convert eBooks to Microsoft Word documents.
+
+7. Image Formats (JPEG, PNG, etc.):
+   - TXT: Convert text content from images using OCR (Optical Character Recognition) tools.
+   - PDF: Convert images to PDF documents.
+   - HTML: Create HTML documents with embedded images.
+   - DOCX: Create DOCX documents with embedded images.
+
+8. Spreadsheets (XLSX, CSV):
+   - TXT: Convert spreadsheet data to plain text.
+   - PDF: Convert spreadsheets to PDF documents.
+   - HTML: Create HTML tables from spreadsheet data.
+   - DOCX: Convert spreadsheets to Microsoft Word documents.
+
+9. Image compression and resizing 
