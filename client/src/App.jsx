@@ -1,16 +1,22 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {NavLink, Routes, Route} from 'react-router-dom' 
+import axios from 'axios' 
+import Home from './components/home'
+import Navbar from './components/navbar'
+import Documents from './components/documents'
+axios.defaults.baseURL = 'https://localhost:5000' 
 
 function App() {
   const [count, setCount] = useState(0)
 
-  return (
-    <>
-      <div className="">
-        random string
-      </div>
+  return (<>
+
+    <Navbar /> 
+
+    <Routes>
+      <Route path="/" element = { < Home /> } /> 
+      <Route path="/documents" element = {< Documents /> } /> 
+    </Routes>
     </>
   )
 }
