@@ -1,7 +1,7 @@
 # Document Conversion and Image Handling Utility
 
 ## Introduction
-in this project I am implementing document conversion and image manipulation. Details are given below.
+In this project I am implementing document conversion and image manipulation. Details are given below.
 
 ## Features
 
@@ -17,4 +17,4 @@ in this project I am implementing document conversion and image manipulation. De
 
 This project is currently in development, any suggestions are welcome. Thanks for you time. 
 
-Feel free to contact me at [your@email.com](mailto:sandipkumar2024@gmail.com) for inquiries or suggestions.
+Feel free to contact me at [sandipkumar2024@gmail.com](mailto:sandipkumar2024@gmail.com) for inquiries or suggestions.
