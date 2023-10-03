@@ -4,7 +4,7 @@ import axios from 'axios'
 import Home from './components/home'
 import Navbar from './components/navbar'
 import Documents from './components/documents'
-axios.defaults.baseURL = 'https://localhost:5000' 
+axios.defaults.baseURL = 'http://localhost:5000' 
 
 function App() {
   const [count, setCount] = useState(0)

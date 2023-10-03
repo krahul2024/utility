@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import FileViewer from './fileViewer'
 import docs from '../assets/formats'
 import ConvertOptions from './convertOptions'
+import axios from 'axios'
 
 const Documents = () => {
   const [files, setFiles] = useState([]); // Initialize as an empty array
@@ -86,6 +87,24 @@ const Documents = () => {
   	return (<> </>)
   }
 
+  // for uploading the files to s3
+  const uploadFiles = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    for (const file of files) formData.append('files', file);
+
+    // sending to backend 
+    try {
+        const response = await axios.post(
+            '/upload/docs',
+            formData, { withCredentials: true }
+        );
+        console.log({ response })
+    } catch (error) {
+        console.log({ error })
+    }
+	}
+
  console.log(docs, available_formats(files[0]?.name), expandIndex)
 
 
@@ -93,33 +112,29 @@ const Documents = () => {
     <>
       <div className="flex flex-col justify-center items-center p-4">
         {/* ---------- Convert from text file to/from pdf file ----------- */}
-        <div
+        <div className="flex gap-4 items-center justify-center"
           onDragEnter={(e) => e.preventDefault()}
           onDragOver={(e) => e.preventDefault()}
           onDrop={handleDragAndDrop}
         >
           <label
             htmlFor="fileInput"
-            className="mt-8 flex border py-4 gap-16 rounded-lg px-12 border-gray-600 cursor-pointer justify-between"
+            className="mt-8 flex border py-3 gap-16 rounded-lg px-12 border-gray-600 cursor-pointer justify-between"
           >
             <span className="p-1">Upload your files...</span>
-            <span className="ml-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-5 h-7"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
-                />
-              </svg>
+            <span className="ml-4 mt-1">
+	             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.1} stroke="currentColor" className="w-5 h-6">
+							  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
+							</svg>
             </span>
           </label>
+          <button onClick={uploadFiles}
+          	className="flex gap-2 justify-center border border-gray-950 mt-8 py-4 px-8 bg-green-600 rounded-lg">
+          	Upload
+          	<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+						  <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+						</svg>
+          </button>
 
           <input
             className="hidden"
