@@ -4,9 +4,11 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import { values , connect_database} from './config.js';
 import path from 'path';
-import { createServer } from 'http';
 // routes 
+import authRouter from './routes/auth.js'
+import userRouter from './routes/user.js'
 import uploadRouter from './routes/upload.js'
+import postRouter from './routes/post.js'
 
 const file_path = path.resolve()
 const app = express();
@@ -20,7 +22,10 @@ app.use(express.static('public'));
 app.use('/uploads', express.static(file_path + '/uploads'))
 
 // Route handlers for various routes
-app.use('/upload', uploadRouter); 
+app.use('/auth', authRouter); 
+app.use('/user', userRouter); 
+app.use('/upload', uploadRouter);
+app.use('/post', postRouter); 
 
 // Connecting to the MongoDB database
 mongoose.set('strictQuery', false);

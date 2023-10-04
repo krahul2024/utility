@@ -13,7 +13,7 @@ export const values = {
     time_out: 7 * 24 * 3600 * 1000
 }
 
-const uri = 'mongodb://127.0.0.1:27017/utilsDB';
+const uri = 'mongodb://127.0.0.1:27017/socialDB';
 export const connect_database = async () => {
   try {
     await mongoose.connect(uri, {

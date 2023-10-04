@@ -1,12 +1,11 @@
-import express from 'express';
-import AWS from '@aws-sdk/client-s3';
-import multer from 'multer'; // for files inoformation retreival 
-import { values, connect_database } from '../config.js';
+import { Router } from 'express';
+import multer from 'multer';
+import fs from 'fs';
+import path from 'path';
 import crypto from 'crypto';
-import File from '../models/file.js'
-import fs from 'fs' 
-import path from 'path' 
-const router = express.Router();
+import {values, connect_database} from '../config.js'
+
+const router = Router();
 
 // setting up multer 
 const storage = multer.diskStorage({
@@ -42,40 +41,24 @@ function createFile(file) {
     }
 }
 
-// configuring AWS 
-
-router.post('/docs', upload.array('files'), async (req, res) => {
-    connect_database();
-
-    const files = []
-    for (let i = 0; i < req.files.length; i++) {
-    	const {name:{pad, original} , size, type, ext, encoding} = createFile(req.files[i]);
-    	const newFile = new File({
-    		name:{pad, original}, 
-    		size, type, ext, encoding
-    	}); 
-    	// saving the file to database 
-    	const savedFile = newFile.save(); 
-    	if (!savedFile) return res.status(500).send({
-    		success:false, 
-    		msg:'There was an error saving the file, please try again later.'
-    	})
-    	files.push(newFile); // adding the files which we can send to frontend
-    	// working on the name by which it is saved in uploads folder 
-    	const filename = 'uploads/' + pad + original; 
-    	console.log({filename, path : req.files[i].path})
-    	fs.renameSync(req.files[i].path, filename); 
-    }
-
-    console.log({files})
-    return res.json({
-        success: true,
-        msg: 'Successful', 
-        files
-    });
+router.post('/images', upload.array('files'), async(req,res) => {
+	connect_database(); 
+	const images = []; 
+	console.log({files:req.files})
+	for(let i=0;i<req.files.length;i++){
+		let oldPath = req.files[i].path; 
+		const {name:{pad, original}, size, type, ext, encoding} = createFile(req.files[i]); 
+		const newPath = `uploads/${pad}${original}`
+		console.log({newPath})
+		fs.renameSync(oldPath, newPath); 
+		images.push(createFile(req.files[i])); 
+	}
+	return res.status(200).send({
+		success:true, 
+		msg:'Successfully uploaded the images.', 
+		images
+	});
 });
 
 
-
-
-export default router;
+export default router; 
